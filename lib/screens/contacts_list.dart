@@ -1,9 +1,10 @@
+import 'package:bytebank_persistencia/database/dao/contact_dao.dart';
 import 'package:bytebank_persistencia/models/contact.dart';
 import 'package:bytebank_persistencia/screens/contact_fom.dart';
 import 'package:flutter/material.dart';
-import 'package:bytebank_persistencia/database/app_database.dart';
 
 class ContactsList extends StatelessWidget {
+  final ContactDao _dao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +14,9 @@ class ContactsList extends StatelessWidget {
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: List(),
-        // O delay serve para evitar um erro (tela vermelha) por causa da assíncronidade
-        future: findAll() ,
+        future: _dao.findAll(),
         builder: (context, snapshot) {
-          switch(snapshot.connectionState){
+          switch (snapshot.connectionState) {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
@@ -47,18 +47,13 @@ class ContactsList extends StatelessWidget {
           return Text('Unknown error');
         },
       ),
-      
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context)
-              .push(
-                MaterialPageRoute(
-                  builder: (context) => ContactForm(),
-                ),
-              )
-              .then(
-                (newContact) => debugPrint(newContact.toString()),
-              );
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ContactForm(),
+            ),
+          );
         },
         child: Icon(Icons.add),
       ),

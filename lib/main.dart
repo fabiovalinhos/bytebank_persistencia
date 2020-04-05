@@ -1,9 +1,5 @@
-import 'package:bytebank_persistencia/models/contact.dart';
-import 'package:bytebank_persistencia/screens/contact_fom.dart';
-import 'package:bytebank_persistencia/screens/contacts_list.dart';
 import 'package:bytebank_persistencia/screens/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:bytebank_persistencia/database/app_database.dart';
 
 void main() {
   runApp(ByteBankApp());
